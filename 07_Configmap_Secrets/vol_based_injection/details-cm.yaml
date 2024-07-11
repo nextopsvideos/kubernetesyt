@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata: 
+  name: person-details
+data:
+  first_name: Charan
+  last_name: Narayana

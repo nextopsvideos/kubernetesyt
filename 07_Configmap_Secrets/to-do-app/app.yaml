@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: todo-app  
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: todo-app
+  template:
+    metadata:
+      labels:
+        app: todo-app
+    spec:
+      volumes:
+      - name: config-volume
+        configMap:
+          name: app-config
+      containers:
+      - name: todo-app
+        image: narayanacharan/todo-app-cm #new image without keys.js
+        ports:
+        - containerPort: 3000
+        env:
+        - name: NODE_ENV
+          value: "production"
+        volumeMounts:
+        - name: config-volume
+          mountPath: /config
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: todo-app  
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 80
+    targetPort: 3000
+    protocol: TCP
+  selector:
+    app: todo-app
