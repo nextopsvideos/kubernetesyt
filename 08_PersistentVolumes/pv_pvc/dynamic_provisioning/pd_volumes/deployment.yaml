@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment  #Stateless
+metadata:
+  name: dyn-deployment
+spec:
+  replicas: 10
+  selector:
+    matchLabels:
+      app: my-app
+  template:
+    metadata:
+      labels:
+        app: my-app
+    spec:
+      containers:
+        - name: dyn-container
+          image: nginx:latest
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - name: dyn-volume
+              mountPath: /data
+      volumes:
+        - name: dyn-volume
+          persistentVolumeClaim:
+            claimName: dynamic-disk-vc

@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: my-deployment
 spec:
-  replicas: 1
+  replicas: 10
   selector:
     matchLabels:
       app: my-app
@@ -23,4 +23,4 @@ spec:
       volumes:
         - name: my-volume
           persistentVolumeClaim:
-            claimName: my-pvc
+            claimName: manual-disk-pvc

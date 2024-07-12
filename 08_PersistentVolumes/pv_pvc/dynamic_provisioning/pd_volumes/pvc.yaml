@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+   name: dynamic-disk-vc
+spec:
+   storageClassName: my-custom-sc
+   accessModes:
+     - ReadWriteOnce
+   resources:
+     requests:
+       storage: 5Gi

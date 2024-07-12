@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: PersistentVolume 
+metadata:
+  name: manual-disk-vol
+spec:
+  capacity:
+    storage: 5Gi
+  accessModes:
+    - ReadWriteOnce #ReadWriteMany not applicable to PD, and Mapped to a specific Node. 
+  persistentVolumeReclaimPolicy: Delete
+  claimRef:
+    namespace: default
+    name: manual-disk-pvc
+  gcePersistentDisk:
+    pdName: gke-pv
+    fsType: ext4
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: manual-disk-pvc
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: 
+  resources:
+    requests:
+      storage: 5Gi
