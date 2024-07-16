@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: taints-example
+spec:
+  replicas: 10
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx-container
+        image: nginx:latest
+      tolerations:
+      - key: "nodepurpose"
+        operator: "Equal"
+        value: "infra"
+        effect: "NoSchedule"

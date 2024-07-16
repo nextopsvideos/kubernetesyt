@@ -1,0 +1,15 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: factorial-job
+spec:
+  completions: 1
+  parallelism: 1
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+      - name: factorial-job-container
+        image: python:3
+        command: ["python"]
+        args: ["-c", "import math; num = 5; result = math.factorial(num); print(f'The factorial of {num} is {result}')"]

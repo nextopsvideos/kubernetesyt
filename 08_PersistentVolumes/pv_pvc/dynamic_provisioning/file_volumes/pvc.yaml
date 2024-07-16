@@ -1,0 +1,12 @@
+#Enable FileStore CSI driver for cluster if it is stuck in pending state
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: filestore-pvc
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: filestore-sc
+  resources:
+    requests:
+      storage: 1Ti
