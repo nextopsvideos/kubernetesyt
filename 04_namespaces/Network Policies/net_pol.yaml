@@ -1,0 +1,16 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: deny-cross-ns-comm
+  namespace: dev-team
+spec:
+  podSelector:
+    matchLabels:
+      app: nginx-deploy
+  policyTypes:
+  - Ingress 
+  ingress:
+  - from:
+      - namespaceSelector:
+          matchLabels:
+            name: default

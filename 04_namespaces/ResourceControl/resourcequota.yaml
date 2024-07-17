@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ResourceQuota
+metadata: 
+  name: dev-team-quota
+  namespace: dev-team
+spec:
+  hard:
+    requests.cpu: "1"
+    requests.memory: "1Gi"
+    limits.cpu: "2"
+    limits.memory: "2Gi"
+    pods: "15"
